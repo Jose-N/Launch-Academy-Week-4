@@ -15,6 +15,7 @@ class FormContainer extends Component {
       email: '',
     }
     this.handleChange = this.handleChange.bind(this)
+    this.formSubmit = this.formSubmit.bind(this)
   }
 
   handleChange(event) {
@@ -23,9 +24,15 @@ class FormContainer extends Component {
     this.setState({[name]: value})
   }
 
+  formSubmit(event) {
+    console.log('in form submit')
+    event.preventDefault();
+    console.log(this.state)
+  }
+
   render() {
     return (
-      <form className="callout" id="shipping-address-form">
+      <form className="callout" id="shipping-address-form" onSubmit={this.formSubmit}>
         <h1>Shipping Address</h1>
         < TextField
           name='firstName'
@@ -83,7 +90,7 @@ class FormContainer extends Component {
           content={this.state.email} 
           handleChange={this.handleChange} />
 
-        <input type="submit" className="button" value="Submit "/>
+        <input type="submit" className="button" value="Submit"/>
       </form>
     )
   }
