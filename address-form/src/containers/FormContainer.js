@@ -1,53 +1,87 @@
 import React, { Component } from 'react'
+import TextField from '../components/TextField';
 
 class FormContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      firstName: '',
+      lastName: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      phoneNumber: '',
+      email: '',
     }
+    this.handleChange = this.handleChange.bind(this)
+  }
+
+  handleChange(event) {
+    let name = event.target.name
+    let value = event.target.value
+    this.setState({[name]: value})
   }
 
   render() {
     return (
       <form className="callout" id="shipping-address-form">
         <h1>Shipping Address</h1>
-        <div>
-          <label htmlFor="firstName">First Name:</label>
-          <input type="text" id="first-name" name="firstName" />
-        </div>
+        < TextField
+          name='firstName'
+          label='First Name'
+          id='first-name'
+          content={this.state.firstName}
+          handleChange={this.handleChange} />
 
-        <div>
-          <label htmlFor="lastName">Last Name:</label>
-          <input type="text" id="last-name" name="lastName" />
-        </div>
+        < TextField
+          name='lastName'
+          label='Last Name'
+          id='last-name' 
+          content={this.state.lastName} 
+          handleChange={this.handleChange} />
 
-        <label htmlFor="address">Address:</label>
-        <input type="text" id="address" name="address" />
+        < TextField
+          name='address'
+          label='Address'
+          id='address' 
+          content={this.state.address} 
+          handleChange={this.handleChange} />
 
-        <div>
-          <label htmlFor="city">City:</label>
-          <input type="text" id="city" name="city" />
-        </div>
+        < TextField
+          name='city'
+          label='City'
+          id='city' 
+          content={this.state.city} 
+          handleChange={this.handleChange} />
 
-        <div>
-          <label htmlFor="state">State:</label>
-          <input type="text" id="state" name="state" />
-        </div>
+        < TextField
+          name='state'
+          label='State'
+          id='state' 
+          content={this.state.state} 
+          handleChange={this.handleChange} />
 
-        <div>
-          <label htmlFor="zipCode">Zip Code:</label>
-          <input type="text" id="zip-code" name="zipCode" />
-        </div>
+        < TextField
+          name='zipCode'
+          label='Zip Code'
+          id='zip-code'
+          content={this.state.zipCode} 
+          handleChange={this.handleChange} />
 
-        <div>
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input type="text" id="phone-number" name="phoneNumber" />
-        </div>
+        < TextField
+          name='phoneNumber'
+          label='Phone Number'
+          id='phone-number'
+          content={this.state.phoneNumber} 
+          handleChange={this.handleChange} />
 
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="text" id="email" name="email" />
-        </div>
+        < TextField
+          name='email'
+          label='Email'
+          id='email'
+          content={this.state.email} 
+          handleChange={this.handleChange} />
 
         <input type="submit" className="button" value="Submit "/>
       </form>
