@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import Restaurant from '../components/Restaurant'
 import Reviews from '../components/Reviews'
 import ReviewForm from '../components/ReviewForm'
+import RestaurantForm from '../components/RestaurantForm'
 
 import restaurants from '../constants/restaurants'
 import reviews from '../constants/reviews'
@@ -15,12 +16,19 @@ class App extends Component {
       reviews,
       selectedId: restaurants[0].id,
       name: '',
-      rating: '10',
-      review: ''
+      rating: '20',
+      review: '',
+      restaurantName: '',
+      restaurantAddress: '',
+      restaurantDescription: '',
+      restaurantCategories: [],      
+      restaurantImage: '',
+      restaurantWebsite: ''
     }
     this.restaurantClick = this.restaurantClick.bind(this)
     this.handleItemChange = this.handleItemChange.bind(this)
-    this.handleFormSubmit = this.handleFormSubmit.bind(this)
+    this.handleReviewFormSubmit = this.handleReviewFormSubmit.bind(this)
+    this.handleRestaurantFormSubmit = this.handleRestaurantFormSubmit.bind(this)
   }
 
   restaurantClick(event) {
@@ -40,7 +48,7 @@ class App extends Component {
     this.setState({[name]: value})
   }
 
-  handleFormSubmit(event) {
+  handleReviewFormSubmit(event) {
     event.preventDefault()
     let formPayload = {
       restaurant_id: this.state.selectedId,
@@ -52,12 +60,28 @@ class App extends Component {
     this.clearForm(event)
   }
 
+  handleRestaurantFormSubmit(event) {
+    event.preventDefault()
+    let id = this.state.restaurantName.replace(" ","-")
+    let categories = this.state.restaurantCategories.split(',')
+    let formPayload = {
+      name: this.state.restaurantName,
+      location: this.state.restaurantAddress,
+      description: this.state.restaurantDescription,
+      categories: categories,      
+      image: this.state.restaurantImage,
+      website: this.state.restaurantWebsite
+    }
+    this.setState({restaurants: this.state.restaurants.concat(formPayload)})
+    this.clearForm(event)
+  }
+
   clearForm(event) {
-    this.setState({name: '', rating:'10', review: ''})
+    this.setState({name: '', rating:'20', review: ''})
   }
 
   render() {
-    let restaurantComponents = restaurants.map((restaurant) => {
+    let restaurantComponents = this.state.restaurants.map((restaurant) => {
       return (
         <Restaurant key={restaurant.id}
           data={restaurant}
@@ -85,7 +109,17 @@ class App extends Component {
               rating={this.state.rating}
               name={this.state.name}
               review={this.state.review}
-              handleFormSubmit={this.handleFormSubmit} />
+              handleFormSubmit={this.handleReviewFormSubmit} />
+            <br />
+            < RestaurantForm 
+              handleItemChange={this.handleItemChange}
+              restaurantName={this.state.restaurantName} 
+              restaurantAddress={this.state.restaurantAddress} 
+              restaurantDescription={this.state.restaurantDescription}
+              restaurantCategories={this.state.restaurantCategories}      
+              restaurantImage={this.state.restaurantImage} 
+              restaurantWebsite={this.state.restaurantWebsite} 
+              handleFormSubmit={this.handleRestaurantFormSubmit} />
           </div>
         </div>
       </div>
