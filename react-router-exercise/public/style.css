@@ -1,0 +1,28 @@
+/*Your style goes here*/
+#everything {
+  background-color: #C08BC4;
+}
+#app {
+  margin: 0px;
+  margin-right: 0px;
+}
+.nav-bar {
+  padding: 20px;
+  background-color: #8165A9;
+  display: block;
+  border-bottom: solid;
+  border-width: 1px;
+}
+.link {
+  margin: 10px;
+  margin-left: 20px;
+  margin-right: 30px;
+  color: white;
+  text-size: 200%;
+}
+.main {
+  clear: both;
+  color: white;
+  text-align: center;
+  margin-top: 20px;
+}
